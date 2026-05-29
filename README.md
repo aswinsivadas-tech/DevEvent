@@ -1,36 +1,294 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+````md
+# DevEvent
 
-## Getting Started
+A modern full-stack event management platform built with Next.js 16, MongoDB, Tailwind CSS v4, and TypeScript.  
+DevEvent allows users to create, manage, and explore developer-focused events with a clean and responsive UI.
 
-First, run the development server:
+---
+
+# Features
+
+- Create and manage tech events
+- MongoDB database integration with Mongoose
+- Dynamic event pages using slugs
+- Tailwind CSS v4 styling
+- Responsive modern UI
+- TypeScript support
+- Server-side rendering with Next.js App Router
+- Event validation and normalization
+- Automatic slug generation
+- Cloudinary image support
+- PostHog analytics integration
+
+---
+
+# Tech Stack
+
+## Frontend
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS v4
+
+## Backend
+- Next.js Server Actions / API Routes
+- MongoDB
+- Mongoose
+
+## Other Tools
+- Cloudinary
+- PostHog
+- Lucide React
+- clsx
+- tailwind-merge
+
+---
+
+# Project Structure
+
+```bash
+devevent/
+│
+├── app/
+│   ├── api/
+│   ├── events/
+│   ├── globals.css
+│   └── layout.tsx
+│
+├── components/
+│
+├── database/
+│   └── event.model.ts
+│
+├── lib/
+│   └── mongodb.ts
+│
+├── public/
+│
+├── .env.local
+├── package.json
+└── README.md
+````
+
+---
+
+# Installation
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/devevent.git
+cd devevent
+```
+
+---
+
+## 2. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+# Environment Variables
+
+Create a `.env.local` file in the root directory.
+
+```env
+# MongoDB
+MONGODB_URI=your_mongodb_connection_string
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# PostHog
+NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
+NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+```
+
+---
+
+# Running the Project
+
+## Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Start Production Server
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Event Model Features
+
+The event schema includes:
+
+* Title validation
+* Description validation
+* Slug auto-generation
+* Date normalization
+* Time normalization
+* Automatic timestamps
+* Unique slug handling
+* Compound indexing
+
+---
+
+# Example Event Data
+
+```json
+{
+  "title": "Frontend Developer Conference",
+  "description": "A large-scale developer conference focused on frontend technologies.",
+  "overview": "Learn React, Next.js, and performance optimization.",
+  "image": "https://example.com/banner.jpg",
+  "venue": "Tech Convention Center",
+  "location": "San Francisco, CA",
+  "date": "2026-01-31",
+  "time": "13:00",
+  "mode": "offline",
+  "audience": "Frontend Developers",
+  "agenda": [
+    "Keynote Session",
+    "React Workshop",
+    "Networking"
+  ],
+  "organizer": "DevEvent Team",
+  "tags": [
+    "React",
+    "Next.js",
+    "Frontend"
+  ]
+}
+```
+
+---
+
+# Tailwind CSS Setup
+
+This project uses Tailwind CSS v4.
+
+Example `globals.css`:
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+---
+
+# Common Issues
+
+## Tailwind Styles Not Loading
+
+Make sure:
+
+```bash
+npm install tw-animate-css
+```
+
+and inside `globals.css`:
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+---
+
+## MongoDB URI Error
+
+Ensure `.env.local` contains:
+
+```env
+MONGODB_URI=your_connection_string
+```
+
+Restart the development server after updating environment variables.
+
+---
+
+## Duplicate Schema Index Warning
+
+Remove duplicate slug index definitions.
+
+Do NOT use both:
+
+```ts
+slug: {
+  unique: true
+}
+```
+
+and
+
+```ts
+EventSchema.index({ slug: 1 }, { unique: true });
+```
+
+Use only one.
+
+---
+
+# Scripts
+
+```json
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint"
+}
+```
+
+---
+
+# Future Improvements
+
+* Authentication
+* User dashboard
+* Event registration
+* Payment integration
+* Admin panel
+* Search and filters
+* Email notifications
+* Event analytics
+
+---
+
+# Author
+
+Aswin Sivadas
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+```
+```
